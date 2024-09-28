@@ -6,6 +6,13 @@
         <div class="alert alert-success">{{ session('message') }}</div>
     @endif
     <h1>Dettagli progetto</h1>
+    <div>
+        <a href="{{ route('admin.projects.edit', ['project' => $project->id]) }}" class="btn btn-secondary">Modifica</a>
+        @include('admin.partials.formdelete', [
+                            'route' => route('admin.projects.destroy', $project),
+                            'message' => "Confermi l\'eliminazione del progetto: $project->title ?"
+                            ])
+    </div>
     <ul>
         <li>Titolo: {{ $project->title }} </li>
         <li>Descrizione: {{ $project->text }} </li>

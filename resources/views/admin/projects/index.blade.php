@@ -2,6 +2,13 @@
 
 @section('content')
     <h1>Elenco progetti</h1>
+
+    @if(session('delete'))
+        <div class="alert alert-success">
+            {{ session('delete') }}
+        </div>
+    @endif
+
     <table class="table">
         <thead>
           <tr>
@@ -20,14 +27,15 @@
                     <td>
                         <a href="{{ route('admin.projects.show', ['project' => $project->id]) }}" class="btn btn-primary">Dettagli</a>
                         <a href="{{ route('admin.projects.edit', ['project' => $project->id]) }}" class="btn btn-secondary">Modifica</a>
-                        <form class="d-inline" action="{{ route('admin.projects.destroy', ['project' => $project->id]) }}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <input type="submit" value="Elimina" class="btn btn-danger">
-                        </form>
+                        @include('admin.partials.formdelete', [
+                            'route' => route('admin.projects.destroy', $project),
+                            'message' => "Confermi l\'eliminazione del progetto: $project->title ?"
+                            ])
                     </td>
                 </tr>
             @endforeach
         </tbody>
       </table>
+
+      {{ $projects->links() }}
 @endsection
