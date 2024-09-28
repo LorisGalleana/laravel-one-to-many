@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\Guest\PageController;
 
 /*
@@ -24,7 +25,14 @@ Route::middleware(['auth', 'verified'])
     ->name('admin.')
     ->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('home');
+        Route::get('type-projects', [TypeController::class, 'typeProjects'])->name('typeProjects');
+        Route::get('project-pert-type/{type}', [TypeController::class, 'projectPerType'])->name('projectPerType');
+
+
         Route::resource('projects', ProjectController::class);
+        Route::resource('types', TypeController::class)->except([
+            'show', 'edit', 'create'
+        ]);
     });
 
 Route::middleware('auth')

@@ -17,10 +17,13 @@ li{
 }
 
 aside{
-    width: 180px;
+    width: 220px;
     height: 100%;
 }
 .content{
     overflow: auto;
-    width: calc(100% - 180px);
+    width: calc(100% - 220px);
+}
+.input-edit{
+    border: none;
 }

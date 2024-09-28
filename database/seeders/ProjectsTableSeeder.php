@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 use App\Models\Project;
+use App\Models\Type;
 use Faker\Generator as Faker;
 use App\Functions\Helper;
 
@@ -18,6 +19,7 @@ class ProjectsTableSeeder extends Seeder
         for ($i = 0; $i < 50; $i++) {
 
             $new_project = new Project();
+            $new_project->type_id = Type::inRandomOrder()->first()->id;
             $new_project->title = $faker->sentence;
             $new_project->slug = Helper::generateSlug($new_project->title, Project::class);
             $new_project->text = $faker->paragraph;

@@ -14,7 +14,8 @@
                             ])
     </div>
     <ul>
-        <li>Titolo: {{ $project->title }} </li>
+        <h3>Titolo: {{ $project->title }} </h3>
+        <li>Tipologia: {{ $project->type ? $project->type->name : 'NESSUNA CATEGORIA' }} </li>
         <li>Descrizione: {{ $project->text }} </li>
         <li>Data creazione: {{ ( $project->created_at )->format('d/m/Y') }} </li>
         <li>Data ultima modifica: {{ ( $project->updated_at )->format('d/m/Y') }} </li>
